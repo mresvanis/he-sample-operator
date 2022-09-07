@@ -1,0 +1,6 @@
+apiVersion: example.com/v1alpha1
+kind: DeviceConfig
+metadata:
+  name: deviceconfig-sample
+spec:
+  # TODO(user): Add fields here
