@@ -77,6 +77,7 @@ func NewDeviceConfigReconciler(
 //+kubebuilder:rbac:groups=example.com,resources=deviceconfigs,verbs=get;list;watch;create;update;patch;delete
 //+kubebuilder:rbac:groups=example.com,resources=deviceconfigs/status,verbs=get;update;patch
 //+kubebuilder:rbac:groups=example.com,resources=deviceconfigs/finalizers,verbs=update
+//+kubebuilder:rbac:groups="kmm.sigs.k8s.io",resources=modules,verbs=get;list;watch;create;update;patch;delete
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
