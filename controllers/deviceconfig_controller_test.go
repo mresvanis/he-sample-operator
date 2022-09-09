@@ -86,7 +86,7 @@ var _ = Describe("DeviceConfigReconciler", func() {
 
 					gomock.InOrder(
 						c.EXPECT().
-							Get(ctx, req.NamespacedName, gomock.Any()).
+							Get(ctx, req.NamespacedName, gomock.Any(), gomock.Any()).
 							Return(apierrors.NewNotFound(schema.GroupResource{Resource: "deviceconfigs"}, testDeviceConfigName)),
 					)
 				})
@@ -106,7 +106,7 @@ var _ = Describe("DeviceConfigReconciler", func() {
 
 					gomock.InOrder(
 						c.EXPECT().
-							Get(ctx, req.NamespacedName, gomock.Any()).
+							Get(ctx, req.NamespacedName, gomock.Any(), gomock.Any()).
 							Return(apierrors.NewServiceUnavailable("Service unavailable")),
 					)
 				})
@@ -127,8 +127,8 @@ var _ = Describe("DeviceConfigReconciler", func() {
 					r = NewDeviceConfigReconciler(c, s, record.NewFakeRecorder(1), mr, fu, cu, nsv)
 
 					gomock.InOrder(
-						c.EXPECT().Get(ctx, req.NamespacedName, gomock.Any()).DoAndReturn(
-							func(_ interface{}, _ interface{}, d *examplecomv1alpha1.DeviceConfig) error {
+						c.EXPECT().Get(ctx, req.NamespacedName, gomock.Any(), gomock.Any()).DoAndReturn(
+							func(_ interface{}, _ interface{}, d *examplecomv1alpha1.DeviceConfig, _ ...interface{}) error {
 								d.ObjectMeta = dc.ObjectMeta
 								d.Spec = dc.Spec
 								return nil
@@ -158,8 +158,8 @@ var _ = Describe("DeviceConfigReconciler", func() {
 					r = NewDeviceConfigReconciler(c, s, record.NewFakeRecorder(1), mr, fu, cu, nsv)
 
 					gomock.InOrder(
-						c.EXPECT().Get(ctx, req.NamespacedName, gomock.Any()).DoAndReturn(
-							func(_ interface{}, _ interface{}, d *examplecomv1alpha1.DeviceConfig) error {
+						c.EXPECT().Get(ctx, req.NamespacedName, gomock.Any(), gomock.Any()).DoAndReturn(
+							func(_ interface{}, _ interface{}, d *examplecomv1alpha1.DeviceConfig, _ ...interface{}) error {
 								d.ObjectMeta = dc.ObjectMeta
 								d.Spec = dc.Spec
 								return nil
@@ -191,8 +191,8 @@ var _ = Describe("DeviceConfigReconciler", func() {
 						r = NewDeviceConfigReconciler(c, s, record.NewFakeRecorder(1), mr, fu, cu, nsv)
 
 						gomock.InOrder(
-							c.EXPECT().Get(ctx, req.NamespacedName, gomock.Any()).DoAndReturn(
-								func(_ interface{}, _ interface{}, d *examplecomv1alpha1.DeviceConfig) error {
+							c.EXPECT().Get(ctx, req.NamespacedName, gomock.Any(), gomock.Any()).DoAndReturn(
+								func(_ interface{}, _ interface{}, d *examplecomv1alpha1.DeviceConfig, _ ...interface{}) error {
 									d.ObjectMeta = dc.ObjectMeta
 									d.Spec = dc.Spec
 									return nil
@@ -243,8 +243,8 @@ var _ = Describe("DeviceConfigReconciler", func() {
 				Expect(examplecomv1alpha1.AddToScheme(s)).ToNot(HaveOccurred())
 
 				gomock.InOrder(
-					c.EXPECT().Get(ctx, req.NamespacedName, gomock.Any()).DoAndReturn(
-						func(_ interface{}, _ interface{}, d *examplecomv1alpha1.DeviceConfig) error {
+					c.EXPECT().Get(ctx, req.NamespacedName, gomock.Any(), gomock.Any()).DoAndReturn(
+						func(_ interface{}, _ interface{}, d *examplecomv1alpha1.DeviceConfig, _ ...interface{}) error {
 							d.ObjectMeta = dc.ObjectMeta
 							d.Spec = dc.Spec
 							return nil
@@ -295,8 +295,8 @@ var _ = Describe("DeviceConfigReconciler", func() {
 						Expect(kmmv1beta1.AddToScheme(s)).ToNot(HaveOccurred())
 
 						gomock.InOrder(
-							c.EXPECT().Get(ctx, req.NamespacedName, gomock.Any()).DoAndReturn(
-								func(_ interface{}, _ interface{}, d *examplecomv1alpha1.DeviceConfig) error {
+							c.EXPECT().Get(ctx, req.NamespacedName, gomock.Any(), gomock.Any()).DoAndReturn(
+								func(_ interface{}, _ interface{}, d *examplecomv1alpha1.DeviceConfig, _ ...interface{}) error {
 									d.ObjectMeta = dc.ObjectMeta
 									d.Spec = dc.Spec
 									return nil
@@ -328,8 +328,8 @@ var _ = Describe("DeviceConfigReconciler", func() {
 							Expect(kmmv1beta1.AddToScheme(s)).ToNot(HaveOccurred())
 
 							gomock.InOrder(
-								c.EXPECT().Get(ctx, req.NamespacedName, gomock.Any()).DoAndReturn(
-									func(_ interface{}, _ interface{}, d *examplecomv1alpha1.DeviceConfig) error {
+								c.EXPECT().Get(ctx, req.NamespacedName, gomock.Any(), gomock.Any()).DoAndReturn(
+									func(_ interface{}, _ interface{}, d *examplecomv1alpha1.DeviceConfig, _ ...interface{}) error {
 										d.ObjectMeta = dc.ObjectMeta
 										d.Spec = dc.Spec
 										return nil
@@ -358,8 +358,8 @@ var _ = Describe("DeviceConfigReconciler", func() {
 							Expect(kmmv1beta1.AddToScheme(s)).ToNot(HaveOccurred())
 
 							gomock.InOrder(
-								c.EXPECT().Get(ctx, req.NamespacedName, gomock.Any()).DoAndReturn(
-									func(_ interface{}, _ interface{}, d *examplecomv1alpha1.DeviceConfig) error {
+								c.EXPECT().Get(ctx, req.NamespacedName, gomock.Any(), gomock.Any()).DoAndReturn(
+									func(_ interface{}, _ interface{}, d *examplecomv1alpha1.DeviceConfig, _ ...interface{}) error {
 										d.ObjectMeta = dc.ObjectMeta
 										d.Spec = dc.Spec
 										return nil
@@ -386,8 +386,8 @@ var _ = Describe("DeviceConfigReconciler", func() {
 			Context("which does not contain a deletion finalizer", func() {
 				It("should do nothing", func() {
 					gomock.InOrder(
-						c.EXPECT().Get(ctx, req.NamespacedName, gomock.Any()).DoAndReturn(
-							func(_ interface{}, _ interface{}, d *examplecomv1alpha1.DeviceConfig) error {
+						c.EXPECT().Get(ctx, req.NamespacedName, gomock.Any(), gomock.Any()).DoAndReturn(
+							func(_ interface{}, _ interface{}, d *examplecomv1alpha1.DeviceConfig, _ ...interface{}) error {
 								d.ObjectMeta = dc.ObjectMeta
 								d.Spec = dc.Spec
 								return nil
